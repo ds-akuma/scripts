@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+
+if [ "$#" -ne 1 ]; then 
+	echo "Usage: $0 <enter file name>"
+fi
+
+filename="$1"
+
+if [ ! -f "$filename"]; then
+	echo "file not found"
+	exit 1
+fi
+
+awk '{$1=$1; print}' "$filename" > temp && mv temp "$filename"
+
+echo "Spaces removed successfully from $filename"
